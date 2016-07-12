@@ -17,4 +17,6 @@ public class SplashScreen extends FragmentActivity {
         viewpager.setAdapter(padapter);
 
     }
+
+    // seb
 }
