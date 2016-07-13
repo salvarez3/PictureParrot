@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="byteme.pictureparrot.SettingsMenu"
+    android:background="#ffffff">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/yellowRectangle"
+        android:background="@drawable/yellow_rectangle"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#ffdc7d" />
+
+    <ImageButton
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/backButton"
+        android:background="@drawable/back_button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Settings"
+        android:id="@+id/settingsTitle"
+        android:layout_alignTop="@+id/backButton"
+        android:layout_marginTop="7dp"
+        android:textSize="33sp"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="100dp"
+        android:text="Storage Location"
+        android:id="@+id/storageLocation"
+        android:textSize="17sp"
+        android:background="#ffffff"
+        android:textColor="#4cb7e4"
+        android:padding="0dp" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="200dp"
+        android:text="About"
+        android:id="@+id/about"
+        android:textSize="17sp"
+        android:background="#ffffff"
+        android:textColor="#4cb7e4"
+        android:padding="0dp" />
+
+
+</RelativeLayout>
