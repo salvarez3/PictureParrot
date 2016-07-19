@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PictureLocation" />
-        <activity android:name=".SettingsMenu"></activity>
+        <activity android:name=".SettingsMenu" />
+        <activity android:name=".hello"></activity>
     </application>
 
 </manifest>
