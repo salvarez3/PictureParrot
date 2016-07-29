@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PictureLocation extends AppCompatActivity {
@@ -31,6 +32,16 @@ public class PictureLocation extends AppCompatActivity {
         TextView tx3 = (TextView)findViewById(R.id.newImageText);
         Typeface custom_font3 = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
         tx3.setTypeface(custom_font3);
+
+        ImageView newPictureImage = (ImageView)findViewById(R.id.newPictureImage);
+        newPictureImage.setOnClickListener(
+                new ImageButton.OnClickListener(){
+                    public void onClick(View v){
+                        startActivity(new Intent(PictureLocation.this, SettingsMenu.class));
+                    }
+
+                }
+        );
 
         ImageButton settingsButton = (ImageButton)findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(
