@@ -13,20 +13,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="HELLO"
+        android:text="PLAY AROUND WITH MOVING WIDGETS AROUND AND SELECTING RESOURCES TO PUT INSIDE AN IMAGEVIEW"
         android:id="@+id/textView"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="200dp" />
-
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:id="@+id/imageView3"
-        android:src="@drawable/parrot_logo2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="117dp" />
+        android:textAlignment="center"
+        android:textColor="#800000"
+        android:layout_marginTop="273dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="101dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_marginTop="51dp"
+        android:background="@drawable/jigglypuff"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

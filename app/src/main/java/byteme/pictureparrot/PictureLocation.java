@@ -63,7 +63,7 @@ public class PictureLocation extends Activity {
                 }
         );
 
-        // CODE FOR GETTING A BUTTON TO DO THE TAKE PHOTO CODE
+        // CODE FOR GETTING BUTTON TO DO THE TAKE PHOTO CODE
         takePhoto = (ImageButton) findViewById(R.id.takePhoto);
         takePhoto.setOnClickListener(new View.OnClickListener() {
 
@@ -74,7 +74,7 @@ public class PictureLocation extends Activity {
         });
         ivImage = (ImageView) findViewById(R.id.ivImage);
 
-        // CODE FOR GETTING A BUTTON TO DO THE GET IMAGE FROM GALLERY CODE
+        // CODE FOR GETTING BUTTON TO DO THE GET IMAGE FROM GALLERY CODE
         fromGallery = (ImageButton) findViewById(R.id.fromGallery);
         fromGallery.setOnClickListener(new View.OnClickListener() {
 
@@ -148,6 +148,7 @@ public class PictureLocation extends Activity {
         }
     }
 
+    // THIS IS WHERE THE BITMAP FILE IS GENERATED WHEN TAKING A PHOTO
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -168,10 +169,14 @@ public class PictureLocation extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // DISPLAYS THE GENERATED BITMAP FILE IN THE SAME ACTIVITY.
+        // THIS WILL BE REMOVED ONCE THE CODE TO DISPLAY THE IMAGE IN A NEW
+        // ACTIVITY IS DONE
         ivImage.setImageBitmap(thumbnail);
     }
 
-
+    // THIS IS WHERE THE BITMAP FILE IS GENERATED WHEN SELECTING FROM THE GALLERY
     private void onSelectFromGalleryResult(Intent data) {
 
         Bitmap bm = null;
@@ -182,6 +187,9 @@ public class PictureLocation extends Activity {
                 e.printStackTrace();
             }
         }
+        // DISPLAYS THE GENERATED BITMAP FILE IN THE SAME ACTIVITY.
+        // THIS WILL BE REMOVED ONCE THE CODE TO DISPLAY THE IMAGE IN A NEW
+        // ACTIVITY IS DONE
         ivImage.setImageBitmap(bm);
     }
 }
