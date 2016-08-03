@@ -26,9 +26,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Select Image from Gallery"
-        android:id="@+id/galleryText"
-        android:layout_marginTop="57dp"
-        android:layout_below="@+id/imageLocation"
+        android:id="@+id/selectFromGallery"
+        android:layout_marginTop="170dp"
+        android:textSize="30dp"
         android:layout_centerHorizontal="true"
         android:textColor="#4dbbe8" />
 
@@ -37,28 +37,27 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Take New Picture"
-        android:id="@+id/newImageText"
-        android:layout_below="@+id/GalleryImage"
+        android:id="@+id/takeNewPicture"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="400dp"
+        android:textSize="30dp"
         android:textColor="#4dbbe8" />
 
-    <ImageView
+
+    <ImageButton
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/GalleryImage"
-        android:src="@drawable/gallery_image"
-        android:layout_below="@+id/galleryText"
+        android:layout_marginTop="230dp"
+        android:id="@+id/fromGallery"
+        android:background="@drawable/gallery_image"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
+    <ImageButton
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="18dp"
-        android:id="@+id/newPictureImage"
-        android:src="@drawable/new_picture_image"
-        android:layout_below="@+id/newImageText"
+        android:layout_marginTop="450dp"
+        android:id="@+id/takePhoto"
+        android:background="@drawable/new_picture_image"
         android:layout_centerHorizontal="true" />
 
     <ImageButton
@@ -67,5 +66,13 @@
         android:layout_marginLeft="330dp"
         android:id="@+id/settingsButton"
         android:background="@drawable/settings_icon3" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/ivImage"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="300dp"/>
+
 
 </RelativeLayout>

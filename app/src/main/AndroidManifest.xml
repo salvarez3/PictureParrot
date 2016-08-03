@@ -2,11 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="byteme.pictureparrot">
 
-    <supports-screens
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +26,8 @@
         </activity>
         <activity android:name=".PictureLocation" />
         <activity android:name=".SettingsMenu" />
-        <activity android:name=".hello"></activity>
+        <activity android:name=".hello" />
+        <activity android:name=".ImageModification"></activity>
     </application>
 
 </manifest>
