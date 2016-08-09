@@ -3,27 +3,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FFFFFF"
     tools:context="byteme.pictureparrot.ImageModification">
 
+
+    <ImageView
+        android:layout_width="450dp"
+        android:layout_height="500dp"
+        android:id="@+id/sourceImage" />
+
+    <!--<ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:background="#4dbbe8"
+        android:layout_marginTop="590dp"/
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="100dp"
+        android:id="@+id/acceptPhoto"
+        android:background="@drawable/tick_button1" />
+
+    <ImageButton
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="595dp"
+        android:layout_marginLeft="250dp"
+        android:id="@+id/rejectPhoto"
+        android:background="@drawable/red_x_button1" /-->
+
+    <byteme.pictureparrot.DraggableQuote
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DRAGGABLE TEXTVIEW THAT WILL CONTAIN THE QUOTE!"
+            android:textSize="28dp"
+            android:textColor="#FFFFFF"
+            android:textAlignment="center"
+            android:id="@+id/draggableQuote"
+            android:textStyle="bold" />
+
+    </byteme.pictureparrot.DraggableQuote>
+
+    <ImageButton
+        android:id="@+id/selectTextColour"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="540dp"
+        android:background="@drawable/text_colour_icon" />
+
+    <ImageButton
+        android:id="@+id/quoteSelect"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="285dp"
+        android:layout_marginTop="540dp"
+        android:background="@drawable/quote_icon2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="IMAGE HAS BEEN SELECTED"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="131dp" />
+        android:text="Text Colour"
+        android:id="@+id/textColour"
+        android:layout_marginTop="615dp"
+        android:layout_marginLeft="40dp"
+        android:textColor="#4dbbe8"/>
 
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:id="@+id/sourceImage"
-        android:layout_centerVertical="true"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select Quote"
+        android:id="@+id/selectQuote"
+        android:layout_marginTop="615dp"
+        android:layout_marginLeft="265dp"
+        android:textColor="#4dbbe8"/>
+
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="420dp"
+        android:id="@+id/acceptImage"
+        android:background="@drawable/ok_icon2"
         android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>

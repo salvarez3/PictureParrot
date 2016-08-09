@@ -18,7 +18,7 @@
         android:layout_marginTop="60dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="35sp"
+        android:textSize="40sp"
         android:textColor="#FFFD6666" />
 
     <TextView
