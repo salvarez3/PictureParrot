@@ -7,10 +7,35 @@
     tools:context="byteme.pictureparrot.ImageModification">
 
 
-    <ImageView
-        android:layout_width="450dp"
-        android:layout_height="500dp"
-        android:id="@+id/sourceImage" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/sourceImage" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DRAGGABLE TEXTVIEW THAT WILL CONTAIN THE QUOTE!"
+                    android:textSize="28dp"
+                    android:layout_marginBottom="430dp"
+                    android:textColor="#FFFFFF"
+                    android:textAlignment="center"
+                    android:id="@+id/draggableQuote"
+                    android:textStyle="bold"
+                    android:layout_alignBottom="@id/sourceImage" />
+
+            <byteme.pictureparrot.DraggableQuote
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view">
+            </byteme.pictureparrot.DraggableQuote>
+
+        </RelativeLayout>
+
 
     <!--<ImageView
         android:layout_width="fill_parent"
@@ -34,22 +59,7 @@
         android:id="@+id/rejectPhoto"
         android:background="@drawable/red_x_button1" /-->
 
-    <byteme.pictureparrot.DraggableQuote
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/view">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DRAGGABLE TEXTVIEW THAT WILL CONTAIN THE QUOTE!"
-            android:textSize="28dp"
-            android:textColor="#FFFFFF"
-            android:textAlignment="center"
-            android:id="@+id/draggableQuote"
-            android:textStyle="bold" />
-
-    </byteme.pictureparrot.DraggableQuote>
 
     <ImageButton
         android:id="@+id/selectTextColour"

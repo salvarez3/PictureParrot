@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +17,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ImageModification extends AppCompatActivity {
 
@@ -29,12 +35,12 @@ public class ImageModification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_modification_layout);
 
-        // Changes the font of the "Select Image from Gallery" Text View
+        // Changes the font of the "Select Quote" Text View
         TextView tx2 = (TextView)findViewById(R.id.selectQuote);
         Typeface custom_font2 = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
         tx2.setTypeface(custom_font2);
 
-        // Changes the font of the "Select Image from Gallery" Text View
+        // Changes the font of the "Text Colour" Text View
         TextView tx = (TextView)findViewById(R.id.textColour);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
         tx.setTypeface(custom_font);
@@ -111,17 +117,36 @@ public class ImageModification extends AppCompatActivity {
                 }
         );
 
+        // CODE TO SAVE MODIFIED IMAGE TO THE USER'S DEVICE AND GO TO THE SHAREDOWNLOAD CLASS SO IT
+        // CAN BE DISPLAYED
         ImageButton acceptImage = (ImageButton)findViewById(R.id.acceptImage);
         acceptImage.setOnClickListener(
                 new ImageButton.OnClickListener(){
                     public void onClick(View v){
                         // CODE TO SAVE MODIFIED IMAGE HERE AND START SHAREDOWNLOAD ACTIVITY
+                        BitmapDrawable drawable = (BitmapDrawable) sourceImage.getDrawable();
+                        Bitmap modifiedImage = drawable.getBitmap();
+
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        modifiedImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+
+                        File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot-modified.jpg");
+
+                        FileOutputStream fo;
+                        try {
+                            destination.createNewFile();
+                            fo = new FileOutputStream(destination);
+                            fo.write(bytes.toByteArray());
+                            fo.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                         startActivity(new Intent(ImageModification.this, ShareDownload.class));
                     }
                 }
         );
-
-
 }
 }
