@@ -20,10 +20,29 @@ public class ShareDownload extends AppCompatActivity {
                 new ImageButton.OnClickListener(){
                     public void onClick(View v){
                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                        sharingIntent.setType("text/plain"); //CHANGE TEXT/PLAIN TO IMAGE?
+                        sharingIntent.setType("text/plain"); //CHANGE TEXT/PLAIN TO IMAGE? --"image/jpeg"
                         String shareBody = "Here is the share content body"; //CHANGE STRING TO IMAGE AND CONTENT TO MODIFIED IMAGE?
                         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
                         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody); //CAN I CHANGE EXTRA_TEXT TO SUIT OUT MODIFIED IMAGE?
+                        startActivity(Intent.createChooser(sharingIntent, "Share via"));
+
+                    }
+                }
+        );
+
+        // Test Code
+        ImageButton menu_item_share = (ImageButton)findViewById(R.id.menu_item_share);
+        menu_item_share.setOnClickListener(
+                new ImageButton.OnClickListener(){
+                    public void onClick(View v){
+                        Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                        sharingIntent.setType("image/jpeg"); //CHANGE TEXT/PLAIN TO IMAGE? -- "image/jpeg"
+                        Image shareBody = modifiedImage; //CHANGE STRING TO IMAGE AND CONTENT TO MODIFIED IMAGE?
+                        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here");
+                        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody); //CAN I CHANGE EXTRA_TEXT TO SUIT OUT MODIFIED IMAGE?
+
+                        //TO SHARE IMAGE??
+                        sharingIntent.putExtra(Intent.EXTRA_STREAM, modifiedImage); // <<< THIS IS THE CORRECT FORMAT!!
                         startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
                     }
