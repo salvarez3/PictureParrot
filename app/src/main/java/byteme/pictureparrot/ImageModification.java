@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -87,15 +88,19 @@ public class ImageModification extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int category) {
                                 if (QUOTE_CATEGORIES[category].equals("RANDOM")) {
+                                    quote.setGravity(Gravity.CENTER);
                                     quote.setText("RANDOM QUOTE");
                                     // GET RANDOM QUOTE
                                 } else if (QUOTE_CATEGORIES[category].equals("FUNNY")) {
+                                    quote.setGravity(Gravity.CENTER);
                                     quote.setText("FUNNY QUOTE");
                                     // GET FUNNY QUOTE
                                 } else if (QUOTE_CATEGORIES[category].equals("INSPIRATIONAL")) {
+                                    quote.setGravity(Gravity.CENTER);
                                     quote.setText("INSPIRATIONAL QUOTE");
                                     // GET INSPIRATIONAL QUOTE
                                 } else if (QUOTE_CATEGORIES[category].equals("MOTIVATIONAL")) {
+                                    quote.setGravity(Gravity.CENTER);
                                     quote.setText("MOTIVATIONAL QUOTE");
                                     // GET MOTIVATIONAL QUOTE
                                 }
@@ -105,5 +110,18 @@ public class ImageModification extends AppCompatActivity {
                     }
                 }
         );
+
+        ImageButton acceptImage = (ImageButton)findViewById(R.id.acceptImage);
+        acceptImage.setOnClickListener(
+                new ImageButton.OnClickListener(){
+                    public void onClick(View v){
+                        // CODE TO SAVE MODIFIED IMAGE HERE AND START SHAREDOWNLOAD ACTIVITY
+
+                        startActivity(new Intent(ImageModification.this, ShareDownload.class));
+                    }
+                }
+        );
+
+
 }
 }
