@@ -42,7 +42,7 @@ public class ShareDownload extends AppCompatActivity {
                         sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody); //CAN I CHANGE EXTRA_TEXT TO SUIT OUT MODIFIED IMAGE?
 
                         //TO SHARE IMAGE??
-                        sharingIntent.putExtra(Intent.EXTRA_STREAM, modifiedImage); // <<< THIS IS THE CORRECT FORMAT!!
+                        sharingIntent.putExtra(Intent.EXTRA_STREAM, modifiedImage); // <<< THIS IS THE CORRECT FORMAT!! --use parse?
                         startActivity(Intent.createChooser(sharingIntent, "Share via"));
 
                     }
