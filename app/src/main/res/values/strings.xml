@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Picture Parrot</string>
+    <string name="title_share_text">Share Text</string>
 </resources>
