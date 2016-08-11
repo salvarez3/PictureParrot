@@ -49,7 +49,7 @@ public class ImageModification extends AppCompatActivity {
         quote = (TextView) findViewById(R.id.draggableQuote);
 
         // GETTING THE IMAGE FROM INTERNAL STORAGE AND DISPLAYING IT IN THE IMAGEVIEW
-        File file = new File(android.os.Environment.getExternalStorageDirectory(), "PictureParrot.jpg");
+        File file = new File(android.os.Environment.getExternalStorageDirectory(), "PictureParrot-source.jpg");
         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
         sourceImage.setImageBitmap(bitmap);
 

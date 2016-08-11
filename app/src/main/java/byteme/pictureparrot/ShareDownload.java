@@ -1,10 +1,12 @@
 package byteme.pictureparrot;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import java.io.File;
 public class ShareDownload extends AppCompatActivity {
 
     private ImageView modifiedImage;
+    private ImageButton downloadButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class ShareDownload extends AppCompatActivity {
         setContentView(R.layout.share_download_layout);
 
         modifiedImage = (ImageView) findViewById(R.id.modifiedImage);
+        final Context context = this;
+        downloadButton = (ImageButton) findViewById(R.id.download);
 
         // GETTING THE MODIFIED IMAGE FROM INTERNAL STORAGE AND DISPLAYING IT IN THE IMAGEVIEW
         final File file = new File(android.os.Environment.getExternalStorageDirectory(), "PictureParrot-modified.jpg");
@@ -39,6 +44,26 @@ public class ShareDownload extends AppCompatActivity {
                         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here"); // MAYBE NOT NEEDED NOW?
                         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
                         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                    }
+                }
+        );
+
+        // CODE TO DISPLAY A DIALOG BOX WHEN THE USER PRESSES THE DOWNLOAD BUTTON. IT TELLS THEM
+        // THE IMAGE HAS BEEN SAVED AND WHERE ON THEIR DEVICE IT HAS BEEN SAVED.
+        downloadButton.setOnClickListener(
+                new ImageButton.OnClickListener(){
+                    public void onClick(View v){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Image saved!");
+                        builder.setMessage("Your image has been saved in the root directory of your device " +
+                                "with the filename 'PictureParrot-modified.jpg'");
+                        builder.setNegativeButton("Ok", new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int id){
+                                dialog.cancel();
+                            }
+                        });
+                        builder.create();
+                        builder.show();
                     }
                 }
         );

@@ -163,7 +163,7 @@ PictureLocation extends Activity {
         //File destination = new File(Environment.getExternalStorageDirectory(),
                 //  System.currentTimeMillis() + ".jpg");
 
-        File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot.jpg");
+        File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot-source.jpg");
 
         FileOutputStream fo;
         try {
@@ -176,11 +176,6 @@ PictureLocation extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // DISPLAYS THE GENERATED BITMAP FILE IN THE SAME ACTIVITY.
-        // THIS WILL BE REMOVED ONCE THE CODE TO DISPLAY THE IMAGE IN A NEW
-        // ACTIVITY IS DONE
-        //ivImage.setImageBitmap(thumbnail);
         Intent intent = new Intent(this, ImageModification.class);
         startActivity(intent);
     }
@@ -195,7 +190,7 @@ PictureLocation extends Activity {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
                 bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
-                File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot.jpg");
+                File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot-source.jpg");
 
                 FileOutputStream fo;
                 try {
@@ -212,12 +207,7 @@ PictureLocation extends Activity {
                 e.printStackTrace();
             }
         }
-
         Intent intent = new Intent(this, ImageModification.class);
         startActivity(intent);
-        // DISPLAYS THE GENERATED BITMAP FILE IN THE SAME ACTIVITY.
-        // THIS WILL BE REMOVED ONCE THE CODE TO DISPLAY THE IMAGE IN A NEW
-        // ACTIVITY IS DONE
-        //ivImage.setImageBitmap(bm);
     }
 }
