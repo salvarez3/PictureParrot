@@ -6,61 +6,6 @@
     android:background="#FFFFFF"
     tools:context="byteme.pictureparrot.ImageModification">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="500dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/sourceImage" />
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DRAGGABLE TEXTVIEW THAT WILL CONTAIN THE QUOTE!"
-                    android:textSize="28dp"
-                    android:layout_marginBottom="430dp"
-                    android:textColor="#FFFFFF"
-                    android:textAlignment="center"
-                    android:id="@+id/draggableQuote"
-                    android:textStyle="bold"
-                    android:layout_alignBottom="@id/sourceImage" />
-
-            <byteme.pictureparrot.DraggableQuote
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/view">
-            </byteme.pictureparrot.DraggableQuote>
-
-        </RelativeLayout>
-
-
-    <!--<ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:background="#4dbbe8"
-        android:layout_marginTop="590dp"/
-
-    <ImageButton
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="590dp"
-        android:layout_marginLeft="100dp"
-        android:id="@+id/acceptPhoto"
-        android:background="@drawable/tick_button1" />
-
-    <ImageButton
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="595dp"
-        android:layout_marginLeft="250dp"
-        android:id="@+id/rejectPhoto"
-        android:background="@drawable/red_x_button1" /-->
-
-
-
     <ImageButton
         android:id="@+id/selectTextColour"
         android:layout_width="75dp"
@@ -104,6 +49,28 @@
         android:id="@+id/acceptImage"
         android:background="@drawable/ok_icon2"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DRAGGABLE TEXTVIEW THAT WILL CONTAIN THE QUOTE!"
+        android:textSize="28dp"
+        android:layout_marginBottom="430dp"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:id="@+id/draggableQuote"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:id="@+id/sourceImage" />
+
+    <byteme.pictureparrot.DraggableQuote
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view">
+    </byteme.pictureparrot.DraggableQuote>
 
 
 </RelativeLayout>
