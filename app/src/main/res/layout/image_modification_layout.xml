@@ -6,6 +6,26 @@
     android:background="#FFFFFF"
     tools:context="byteme.pictureparrot.ImageModification">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:id="@+id/sourceImage" />
+
+    <byteme.pictureparrot.DraggableQuote
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="DRAGGABLE TEXTVIEW THAT WILL CONTAIN THE QUOTE!"
+            android:textAlignment="center"
+            android:id="@+id/draggableQuote"
+            android:textStyle="bold" />
+    </byteme.pictureparrot.DraggableQuote>
+
     <ImageButton
         android:id="@+id/selectTextColour"
         android:layout_width="75dp"
@@ -49,28 +69,5 @@
         android:id="@+id/acceptImage"
         android:background="@drawable/ok_icon2"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DRAGGABLE TEXTVIEW THAT WILL CONTAIN THE QUOTE!"
-        android:textSize="28dp"
-        android:layout_marginBottom="430dp"
-        android:textColor="#FFFFFF"
-        android:textAlignment="center"
-        android:id="@+id/draggableQuote"
-        android:textStyle="bold" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:id="@+id/sourceImage" />
-
-    <byteme.pictureparrot.DraggableQuote
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/view">
-    </byteme.pictureparrot.DraggableQuote>
-
 
 </RelativeLayout>

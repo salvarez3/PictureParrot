@@ -29,7 +29,6 @@ import java.io.IOException;
 public class
 PictureLocation extends Activity {
 
-    public Bitmap myImage;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private ImageButton takePhoto;
     private ImageButton fromGallery;

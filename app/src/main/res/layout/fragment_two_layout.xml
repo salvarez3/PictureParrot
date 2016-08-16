@@ -12,7 +12,7 @@
         android:src="@drawable/image_slides2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="200dp" />
 
     <ImageView
@@ -29,7 +29,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Automatically overlay quotes on to your favourite photos"
         android:id="@+id/textView3"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="125dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:gravity="center"
@@ -48,6 +48,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:backgroundTint="#4cb7e4"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:textSize="17sp"/>
 
 </RelativeLayout>

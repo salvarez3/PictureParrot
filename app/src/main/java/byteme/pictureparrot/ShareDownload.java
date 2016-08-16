@@ -56,7 +56,7 @@ public class ShareDownload extends AppCompatActivity {
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setTitle("Image saved!");
                         builder.setMessage("Your image has been saved in the root directory of your device " +
-                                "with the filename 'PictureParrot-modified.jpg'");
+                                "with the filename 'PictureParrot-modified.jpg'.");
                         builder.setNegativeButton("Ok", new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog, int id){
                                 dialog.cancel();
