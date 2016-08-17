@@ -35,7 +35,6 @@ PictureLocation extends Activity {
     private ImageView ivImage;
     private String userChosenTask;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

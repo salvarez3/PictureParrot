@@ -5,31 +5,44 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.io.File;
 
 public class ShareDownload extends AppCompatActivity {
 
     private ImageView modifiedImage;
-    private ImageButton downloadButton;
+    private ImageButton saveButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.share_download_layout);
 
+        // Change font of Share and Save TextViews
+        TextView tx1 = (TextView)findViewById(R.id.shareText);
+        TextView tx2 = (TextView)findViewById(R.id.saveText);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
+        tx1.setTypeface(custom_font);
+        tx2.setTypeface(custom_font);
+
         modifiedImage = (ImageView) findViewById(R.id.modifiedImage);
         final Context context = this;
-        downloadButton = (ImageButton) findViewById(R.id.download);
+        saveButton = (ImageButton) findViewById(R.id.save);
 
         // GETTING THE MODIFIED IMAGE FROM INTERNAL STORAGE AND DISPLAYING IT IN THE IMAGEVIEW
-        final File file = new File(android.os.Environment.getExternalStorageDirectory(), "PictureParrot-modified.jpg");
+        File file = new File(Environment.getExternalStorageDirectory(), "PictureParrot-modified.jpg");
         Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
         modifiedImage.setImageBitmap(bitmap);
 
@@ -38,10 +51,11 @@ public class ShareDownload extends AppCompatActivity {
         menuItemShare.setOnClickListener(
                 new ImageButton.OnClickListener(){
                     public void onClick(View v){
+                        File file2 = new File(Environment.getExternalStorageDirectory(), "PictureParrot-modified.jpg");
                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                        Uri uri = Uri.fromFile(file);
+                        Uri uri = Uri.fromFile(file2);
                         sharingIntent.setType("image/jpeg");
-                        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here"); // MAYBE NOT NEEDED NOW?
+                        //sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here"); // MAYBE NOT NEEDED NOW?
                         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
                         startActivity(Intent.createChooser(sharingIntent, "Share via"));
                     }
@@ -50,7 +64,7 @@ public class ShareDownload extends AppCompatActivity {
 
         // CODE TO DISPLAY A DIALOG BOX WHEN THE USER PRESSES THE DOWNLOAD BUTTON. IT TELLS THEM
         // THE IMAGE HAS BEEN SAVED AND WHERE ON THEIR DEVICE IT HAS BEEN SAVED.
-        downloadButton.setOnClickListener(
+        saveButton.setOnClickListener(
                 new ImageButton.OnClickListener(){
                     public void onClick(View v){
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
