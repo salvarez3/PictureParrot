@@ -38,11 +38,11 @@
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginTop="520dp"
-        android:layout_marginLeft="115dp"
+        android:layout_marginLeft="60dp"
         android:text="Select Font"
         android:id="@+id/selectTextFont"
-        android:backgroundTint="#000000"
-        android:textColor="#ffffff"
+        android:backgroundTint="#4cb7e4"
+        android:textColor="#FFFDDB7D"
         android:textSize="20sp"/>
 
     <Button
@@ -50,23 +50,23 @@
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginTop="520dp"
-        android:layout_marginLeft="215dp"
         android:text="Text Colour"
         android:id="@+id/selectTextColour"
-        android:backgroundTint="#7b7d7e"
-        android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:backgroundTint="#4cb7e4"
+        android:textColor="#FFFDDB7D"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:background="@drawable/capsule_button2"
         android:layout_width="80dp"
         android:layout_height="60dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="590dp"
         android:layout_marginLeft="20dp"
         android:text="Select Quote"
         android:id="@+id/quoteSelect"
         android:backgroundTint="#4cb7e4"
-        android:textColor="#ffffff"
+        android:textColor="#FFFDDB7D"
         android:textSize="20sp"/>
 
     <Button
@@ -74,25 +74,38 @@
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginTop="520dp"
-        android:layout_marginLeft="310dp"
+        android:layout_marginLeft="270dp"
         android:text="Text    Size"
         android:id="@+id/textSizeSelect"
-        android:backgroundTint="#FFFDDB7D"
-        android:textColor="#6b6969"
+        android:backgroundTint="#4cb7e4"
+        android:textColor="#FFFDDB7D"
+        android:textSize="20sp"
+        android:clickable="true" />
+
+    <Button
+        android:background="@drawable/capsule_button2"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="310dp"
+        android:text="Custom Quote"
+        android:id="@+id/customQuote"
+        android:backgroundTint="#4cb7e4"
+        android:textColor="#FFFDDB7D"
         android:textSize="20sp"
         android:clickable="true" />
 
     <Button
         android:background="@drawable/capsule_button"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="600dp"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="590dp"
         android:text="FINISH"
         android:id="@+id/acceptImage"
         android:layout_centerHorizontal="true"
         android:backgroundTint="#46d120"
         android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        android:textSize="22sp"/>
 
     <!--<TextView
         android:layout_width="wrap_content"

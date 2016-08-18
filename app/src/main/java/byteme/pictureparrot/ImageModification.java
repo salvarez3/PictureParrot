@@ -1,11 +1,13 @@
 package byteme.pictureparrot;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
@@ -13,15 +15,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -37,10 +39,10 @@ import java.net.URL;
 
 public class ImageModification extends AppCompatActivity {
 
-    final CharSequence[] COLOR_OPTIONS = {"BLACK", "WHITE", "RED", "BLUE", "GREEN", "YELLOW"};
-    final CharSequence[] QUOTE_CATEGORIES = {"INSPIRATIONAL", "FUNNY", "INSPIRATIONAL", "MOTIVATIONAL"};
-    final CharSequence[] TEXT_SIZES = {"VERY SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA LARGE"};
-    final CharSequence[] TEXT_FONTS = {"CABIN REGULAR", "CHEWY", "JOSEFIN SANS", "PACIFICO", "POIRET ONE"};
+    final CharSequence [] COLOR_OPTIONS = {"BLACK", "WHITE", "RED", "BLUE", "GREEN", "YELLOW"};
+    final CharSequence [] QUOTE_CATEGORIES = {"RANDOM", "INSPIRATIONAL", "SPORTS", "LIFE", "FUNNY", "LOVE", "MANAGEMENT", "QUOTE OF THE DAY (FREE)"};
+    final CharSequence [] TEXT_SIZES = {"VERY SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA LARGE"};
+    final CharSequence [] TEXT_FONTS = {"CABIN REGULAR", "CHEWY", "JOSEFIN SANS", "PACIFICO", "POIRET ONE"};
     public ImageView sourceImage;
     private TextView quote;
     private RelativeLayout imageLayout;
@@ -51,32 +53,64 @@ public class ImageModification extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_modification_layout);
 
-
         // Change font of SELECT QUOTE, SELECT FONT, TEXT COLOUR, TEXT SIZE buttons
-        TextView tx1 = (TextView) findViewById(R.id.selectTextColour);
-        TextView tx2 = (TextView) findViewById(R.id.selectTextFont);
-        TextView tx3 = (TextView) findViewById(R.id.textSizeSelect);
-        TextView tx4 = (TextView) findViewById(R.id.quoteSelect);
-        Typeface custom_font1 = Typeface.createFromAsset(getAssets(), "fonts/Chewy.ttf");
+        TextView tx1 = (TextView)findViewById(R.id.selectTextColour);
+        TextView tx2 = (TextView)findViewById(R.id.selectTextFont);
+        TextView tx3 = (TextView)findViewById(R.id.textSizeSelect);
+        TextView tx4 = (TextView)findViewById(R.id.quoteSelect);
+        TextView tx5 = (TextView)findViewById(R.id.customQuote);
+        TextView tx6 = (TextView)findViewById(R.id.acceptImage);
+        Typeface custom_font1 = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
+        Typeface custom_font2 = Typeface.createFromAsset(getAssets(),  "fonts/JosefinSans-Regular.ttf");
         tx1.setTypeface(custom_font1);
         tx2.setTypeface(custom_font1);
         tx3.setTypeface(custom_font1);
         tx4.setTypeface(custom_font1);
+        tx5.setTypeface(custom_font1);
+        tx6.setTypeface(custom_font2);
 
-        /* // Changes the font of the "Select Quote" Text View
-        TextView tx2 = (TextView)findViewById(R.id.selectQuote);
-        Typeface custom_font2 = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
-        tx2.setTypeface(custom_font2);
+        // CODE TO GET A CUSTOM QUOTE FROM THE USER
+        final Context context = this;
+        Button customQuote = (Button)findViewById(R.id.customQuote);
+        customQuote.setTransformationMethod(null);
 
-        // Changes the font of the "Text Colour" Text View
-        TextView tx = (TextView)findViewById(R.id.textColour);
-        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
-        tx.setTypeface(custom_font); */
+        customQuote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LayoutInflater li = LayoutInflater.from(context);
+                View promptsView = li.inflate(R.layout.custom_quote_prompt, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+                alertDialogBuilder.setView(promptsView);
+
+                final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
+
+                alertDialogBuilder
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        quote.setText(userInput.getText());
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
+
 
         sourceImage = (ImageView) findViewById(R.id.sourceImage);
         quote = (TextView) findViewById(R.id.draggableQuote);
         // SETTING THE DEFAULT QUOTE TEXT SIZE TO 19 WHEN THE TEXTVIEW APPEARS
-        quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+        quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,19);
 
         // GETTING THE IMAGE FROM INTERNAL STORAGE AND DISPLAYING IT IN THE IMAGEVIEW
         File file = new File(android.os.Environment.getExternalStorageDirectory(), "PictureParrot-source.jpg");
@@ -84,14 +118,14 @@ public class ImageModification extends AppCompatActivity {
         sourceImage.setImageBitmap(bitmap);
 
         // CODE TO CHOOSE A COLOUR FOR THE QUOTE TEXTVIEW
-        Button selectTextColour = (Button) findViewById(R.id.selectTextColour);
+        Button selectTextColour = (Button)findViewById(R.id.selectTextColour);
         selectTextColour.setTransformationMethod(null);
         selectTextColour.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
+                new Button.OnClickListener(){
+                    public void onClick(View v){
                         AlertDialog.Builder builder = new AlertDialog.Builder(ImageModification.this);
                         builder.setTitle("Select Text Colour");
-                        builder.setItems(COLOR_OPTIONS, new DialogInterface.OnClickListener() {
+                        builder.setItems(COLOR_OPTIONS, new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int colour) {
                                 if (COLOR_OPTIONS[colour].equals("BLACK")) {
@@ -115,31 +149,31 @@ public class ImageModification extends AppCompatActivity {
         );
 
         //CODE TO CHANGE THE FONT OF THE QUOTE
-        Button selectTextFont = (Button) findViewById(R.id.selectTextFont);
+        Button selectTextFont = (Button)findViewById(R.id.selectTextFont);
         selectTextFont.setTransformationMethod(null);
         selectTextFont.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
+                new Button.OnClickListener(){
+                    public void onClick(View v){
                         AlertDialog.Builder builder = new AlertDialog.Builder(ImageModification.this);
                         builder.setTitle("Select Text Font");
-                        builder.setItems(TEXT_FONTS, new DialogInterface.OnClickListener() {
+                        builder.setItems(TEXT_FONTS, new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int category) {
-                                TextView font = (TextView) findViewById(R.id.draggableQuote);
+                                TextView font = (TextView)findViewById(R.id.draggableQuote);
                                 if (TEXT_FONTS[category].equals("CABIN REGULAR")) {
-                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Cabin-Regular.ttf");
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/Cabin-Regular.ttf");
                                     font.setTypeface(customFont);
                                 } else if (TEXT_FONTS[category].equals("CHEWY")) {
-                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Chewy.ttf");
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
                                     font.setTypeface(customFont);
                                 } else if (TEXT_FONTS[category].equals("JOSEFIN SANS")) {
-                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/JosefinSans-Regular.ttf");
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/JosefinSans-Regular.ttf");
                                     font.setTypeface(customFont);
                                 } else if (TEXT_FONTS[category].equals("PACIFICO")) {
-                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Pacifico.ttf");
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/Pacifico.ttf");
                                     font.setTypeface(customFont);
                                 } else if (TEXT_FONTS[category].equals("POIRET ONE")) {
-                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/PoiretOne-Regular.ttf");
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/PoiretOne-Regular.ttf");
                                     font.setTypeface(customFont);
                                 }
                             }
@@ -150,26 +184,26 @@ public class ImageModification extends AppCompatActivity {
         );
 
         // CODE TO CHANGE TEXT SIZE OF THE QUOTE
-        Button textSizeSelect = (Button) findViewById(R.id.textSizeSelect);
+        Button textSizeSelect = (Button)findViewById(R.id.textSizeSelect);
         textSizeSelect.setTransformationMethod(null);
         textSizeSelect.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
+                new Button.OnClickListener(){
+                    public void onClick(View v){
                         AlertDialog.Builder builder = new AlertDialog.Builder(ImageModification.this);
                         builder.setTitle("Select Text Size");
-                        builder.setItems(TEXT_SIZES, new DialogInterface.OnClickListener() {
+                        builder.setItems(TEXT_SIZES, new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int category) {
                                 if (TEXT_SIZES[category].equals("VERY SMALL")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 7);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,7);
                                 } else if (TEXT_SIZES[category].equals("SMALL")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
                                 } else if (TEXT_SIZES[category].equals("MEDIUM")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
                                 } else if (TEXT_SIZES[category].equals("LARGE")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 19);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,19);
                                 } else if (TEXT_SIZES[category].equals("EXTRA LARGE")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 27);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,27);
                                 }
                             }
                         });
@@ -179,33 +213,48 @@ public class ImageModification extends AppCompatActivity {
         );
 
         // CODE TO SELECT A QUOTE FROM A CATEGORY
-        Button quoteSelect = (Button) findViewById(R.id.quoteSelect);
+        Button quoteSelect = (Button)findViewById(R.id.quoteSelect);
         quoteSelect.setTransformationMethod(null);
         quoteSelect.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
+                new Button.OnClickListener(){
+                    public void onClick(View v){
                         AlertDialog.Builder builder = new AlertDialog.Builder(ImageModification.this);
                         builder.setTitle("Select Quote Category");
-                        builder.setItems(QUOTE_CATEGORIES, new DialogInterface.OnClickListener() {
+                        builder.setItems(QUOTE_CATEGORIES, new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialog, int category) {
-                                if (QUOTE_CATEGORIES[category].equals("INSPIRATIONAL")) {
-                                    new JSONTask().execute("http://quotes.rest/qod.json?category=inspire&maxlength=80&api_key="+API_KEY);
+                                if (QUOTE_CATEGORIES[category].equals("RANDOM")) {
                                     quote.setGravity(Gravity.CENTER);
-                                    //quote.setText("RANDOM QUOTE");
+                                    new JSONTask().execute("http://quotes.rest/qod.json?maxlength=80&api_key="+ API_KEY);
+                                }
+
+                                else if (QUOTE_CATEGORIES[category].equals("INSPIRATIONAL")) {
+                                    quote.setGravity(Gravity.CENTER);
+                                    new JSONTask().execute("http://quotes.rest/qod.json?category=inspire&maxlength=80&api_key="+ API_KEY);
+
+                                } else if (QUOTE_CATEGORIES[category].equals("SPORTS")) {
+                                    quote.setGravity(Gravity.CENTER);
+                                    new JSONTask().execute("http://quotes.rest/qod.json?category=sports&maxlength=80&api_key="+ API_KEY);
+
+                                } else if (QUOTE_CATEGORIES[category].equals("LIFE")) {
+                                    quote.setGravity(Gravity.CENTER);
+                                    new JSONTask().execute("http://quotes.rest/qod.json?category=life&maxlength=80&api_key="+ API_KEY);
 
                                 } else if (QUOTE_CATEGORIES[category].equals("FUNNY")) {
                                     quote.setGravity(Gravity.CENTER);
-                                    quote.setText("FUNNY QUOTE");
-                                    // GET FUNNY QUOTE
-                                } else if (QUOTE_CATEGORIES[category].equals("INSPIRATIONAL")) {
+                                    new JSONTask().execute("http://quotes.rest/qod.json?category=funny&maxlength=80&api_key="+ API_KEY);
+
+                                }  else if (QUOTE_CATEGORIES[category].equals("LOVE")) {
                                     quote.setGravity(Gravity.CENTER);
-                                    quote.setText("INSPIRATIONAL QUOTE");
-                                    // GET INSPIRATIONAL QUOTE
-                                } else if (QUOTE_CATEGORIES[category].equals("MOTIVATIONAL")) {
+                                    new JSONTask().execute("http://quotes.rest/qod.json?category=love&maxlength=80&api_key=" + API_KEY);
+
+                                }  else if (QUOTE_CATEGORIES[category].equals("MANAGEMENT")) {
                                     quote.setGravity(Gravity.CENTER);
-                                    quote.setText("MOTIVATIONAL QUOTE");
-                                    // GET MOTIVATIONAL QUOTE
+                                    new JSONTask().execute("http://quotes.rest/qod.json?category=management&maxlength=80&api_key=" + API_KEY);
+
+                                }  else if (QUOTE_CATEGORIES[category].equals("QUOTE OF THE DAY (FREE)")) {
+                                    quote.setGravity(Gravity.CENTER);
+                                    new JSONTask().execute("http://quotes.rest/qod.json");
                                 }
                             }
                         });
@@ -216,13 +265,13 @@ public class ImageModification extends AppCompatActivity {
 
         // CODE TO SAVE MODIFIED IMAGE TO THE USER'S DEVICE AND GO TO THE SHAREDOWNLOAD CLASS SO IT
         // CAN BE DISPLAYED
-        Button acceptImage = (Button) findViewById(R.id.acceptImage);
+        Button acceptImage = (Button)findViewById(R.id.acceptImage);
         acceptImage.setOnClickListener(
-                new Button.OnClickListener() {
-                    public void onClick(View v) {
+                new Button.OnClickListener(){
+                    public void onClick(View v){
                         // CODE TO SAVE MODIFIED IMAGE HERE AND START SHAREDOWNLOAD ACTIVITY
 
-                        imageLayout = (RelativeLayout) findViewById(R.id.modifiedImageRelativeLayout);
+                        imageLayout = (RelativeLayout)findViewById(R.id.modifiedImageRelativeLayout);
                         imageLayout.setDrawingCacheEnabled(true);
                         Bitmap modifiedImage = Bitmap.createBitmap(imageLayout.getDrawingCache());
                         imageLayout.setDrawingCacheEnabled(false);
@@ -251,7 +300,7 @@ public class ImageModification extends AppCompatActivity {
                     }
                 }
         );
-    }
+}
 
     public class JSONTask extends AsyncTask<String, String, String> {
 
@@ -278,11 +327,20 @@ public class ImageModification extends AppCompatActivity {
                 }
 
                 String rawQuote = buffer.toString();
-                rawQuote = rawQuote.substring(104, rawQuote.length()-10);
+
+                // CODE TO GET THE QUOTE WITHOUT QUOTATION MARKS BEFORE AND AFTER
+                //rawQuote = rawQuote.substring(115, rawQuote.length()-10);
                 //rawQuote = rawQuote.substring(rawQuote.indexOf("\"")+ 1);
                 //rawQuote = rawQuote.substring(0, rawQuote.indexOf("\""));
-                return rawQuote;
+                //return rawQuote;
 
+                // CODE TO GET THE QUOTE WITH QUOTATION MARKS BEFORE AND AFTER
+                // USING WITH QUOTATION MARKS FOR NOW.
+                rawQuote = rawQuote.substring(115, rawQuote.length()-10);
+                rawQuote = rawQuote.substring(rawQuote.indexOf("\"")+ 1);
+                rawQuote = rawQuote.substring(0, rawQuote.indexOf("\""));
+                String finalQuote = "\"" + rawQuote + "\"";
+                return finalQuote;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -309,4 +367,5 @@ public class ImageModification extends AppCompatActivity {
             quote.setText(result);
         }
     }
+
 }
