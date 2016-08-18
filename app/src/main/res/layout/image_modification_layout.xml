@@ -30,6 +30,7 @@
                 android:id="@+id/draggableQuote"
                 android:textStyle="bold" />
         </byteme.pictureparrot.DraggableQuote>
+
     </RelativeLayout>
 
     <Button

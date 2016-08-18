@@ -55,7 +55,6 @@ public class ShareDownload extends AppCompatActivity {
                         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
                         Uri uri = Uri.fromFile(file2);
                         sharingIntent.setType("image/jpeg");
-                        //sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject Here"); // MAYBE NOT NEEDED NOW?
                         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
                         startActivity(Intent.createChooser(sharingIntent, "Share via"));
                     }
