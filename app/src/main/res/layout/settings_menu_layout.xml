@@ -21,7 +21,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:id="@+id/backButton"
+        android:id="@+id/settingsToPictureLocation"
         android:background="@drawable/back_button" />
 
     <TextView
@@ -30,12 +30,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Settings"
         android:id="@+id/settingsTitle"
-        android:layout_alignTop="@+id/backButton"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="16dp"
         android:textSize="33sp"
         android:layout_centerHorizontal="true" />
 
-    <Button
+    <!--<Button
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:layout_marginTop="100dp"
@@ -44,9 +43,9 @@
         android:textSize="17sp"
         android:background="#ffffff"
         android:textColor="#4cb7e4"
-        android:padding="0dp" />
+        android:padding="0dp" /> -->
 
-    <Button
+    <!--<Button
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:layout_marginTop="200dp"
@@ -55,7 +54,19 @@
         android:textSize="17sp"
         android:background="#ffffff"
         android:textColor="#4cb7e4"
-        android:padding="0dp" />
+        android:padding="0dp" /> -->
+
+    <Button
+        android:background="@drawable/capsule_button2"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:text="About"
+        android:id="@+id/about"
+        android:backgroundTint="#4cb7e4"
+        android:textColor="#FFFDDB7D"
+        android:textSize="27sp"/>
 
 
 </RelativeLayout>

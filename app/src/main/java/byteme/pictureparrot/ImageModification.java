@@ -5,7 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
@@ -41,8 +44,8 @@ public class ImageModification extends AppCompatActivity {
 
     final CharSequence [] COLOR_OPTIONS = {"BLACK", "WHITE", "RED", "BLUE", "GREEN", "YELLOW"};
     final CharSequence [] QUOTE_CATEGORIES = {"RANDOM", "INSPIRATIONAL", "SPORTS", "LIFE", "FUNNY", "LOVE", "MANAGEMENT", "QUOTE OF THE DAY (FREE)"};
-    final CharSequence [] TEXT_SIZES = {"VERY SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA LARGE"};
-    final CharSequence [] TEXT_FONTS = {"CABIN REGULAR", "CHEWY", "JOSEFIN SANS", "PACIFICO", "POIRET ONE"};
+    final CharSequence [] TEXT_SIZES = {"VERY SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA LARGE", "HUGE"};
+    final CharSequence [] TEXT_FONTS = {"CABIN", "CHEWY", "BALOODA", "PACIFICO", "POIRET ONE", "INDIE FLOWER", "ORBITRON", "SHADOWS INTO LIGHT", "CINZEL"};
     public ImageView sourceImage;
     private TextView quote;
     private RelativeLayout imageLayout;
@@ -74,6 +77,7 @@ public class ImageModification extends AppCompatActivity {
         Button customQuote = (Button)findViewById(R.id.customQuote);
         customQuote.setTransformationMethod(null);
 
+        // CODE TO GET A CUSTOM QUOTE FROM THE USER
         customQuote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +95,7 @@ public class ImageModification extends AppCompatActivity {
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        quote.setText(userInput.getText());
+                                        quote.setText(userInput.getText().toString());
                                     }
                                 })
                         .setNegativeButton("Cancel",
@@ -160,20 +164,32 @@ public class ImageModification extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int category) {
                                 TextView font = (TextView)findViewById(R.id.draggableQuote);
-                                if (TEXT_FONTS[category].equals("CABIN REGULAR")) {
+                                if (TEXT_FONTS[category].equals("CABIN")) {
                                     Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/Cabin-Regular.ttf");
                                     font.setTypeface(customFont);
                                 } else if (TEXT_FONTS[category].equals("CHEWY")) {
                                     Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
                                     font.setTypeface(customFont);
-                                } else if (TEXT_FONTS[category].equals("JOSEFIN SANS")) {
-                                    Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/JosefinSans-Regular.ttf");
+                                } else if (TEXT_FONTS[category].equals("BALOODA")) {
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/BalooDa-Regular.ttf");
                                     font.setTypeface(customFont);
                                 } else if (TEXT_FONTS[category].equals("PACIFICO")) {
                                     Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/Pacifico.ttf");
                                     font.setTypeface(customFont);
                                 } else if (TEXT_FONTS[category].equals("POIRET ONE")) {
                                     Typeface customFont = Typeface.createFromAsset(getAssets(),  "fonts/PoiretOne-Regular.ttf");
+                                    font.setTypeface(customFont);
+                                } else if (TEXT_FONTS[category].equals("INDIE FLOWER")) {
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/IndieFlower.ttf");
+                                    font.setTypeface(customFont);
+                                } else if (TEXT_FONTS[category].equals("ORBITRON")) {
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Orbitron-Regular.ttf");
+                                    font.setTypeface(customFont);
+                                } else if (TEXT_FONTS[category].equals("SHADOWS INTO LIGHT")) {
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/ShadowsIntoLight.ttf");
+                                    font.setTypeface(customFont);
+                                } else if (TEXT_FONTS[category].equals("CINZEL")) {
+                                    Typeface customFont = Typeface.createFromAsset(getAssets(), "fonts/Cinzel.ttf");
                                     font.setTypeface(customFont);
                                 }
                             }
@@ -195,15 +211,17 @@ public class ImageModification extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int category) {
                                 if (TEXT_SIZES[category].equals("VERY SMALL")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,7);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,9);
                                 } else if (TEXT_SIZES[category].equals("SMALL")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
                                 } else if (TEXT_SIZES[category].equals("MEDIUM")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
-                                } else if (TEXT_SIZES[category].equals("LARGE")) {
                                     quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,19);
+                                } else if (TEXT_SIZES[category].equals("LARGE")) {
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,21);
                                 } else if (TEXT_SIZES[category].equals("EXTRA LARGE")) {
-                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,27);
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
+                                } else if (TEXT_SIZES[category].equals("HUGE")) {
+                                    quote.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
                                 }
                             }
                         });
@@ -280,7 +298,7 @@ public class ImageModification extends AppCompatActivity {
                         //Bitmap modifiedImage = drawable.getBitmap();
 
                         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                        modifiedImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+                        modifiedImage.compress(Bitmap.CompressFormat.PNG, 80, bytes);
 
                         File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot-modified.jpg");
 
@@ -367,5 +385,4 @@ public class ImageModification extends AppCompatActivity {
             quote.setText(result);
         }
     }
-
 }

@@ -6,8 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +29,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class
@@ -34,6 +41,8 @@ PictureLocation extends Activity {
     private ImageButton fromGallery;
     private ImageView ivImage;
     private String userChosenTask;
+
+    private String pictureImagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,8 +126,22 @@ PictureLocation extends Activity {
 
     private void cameraIntent()
     {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
+
+        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        //String imageFileName = timeStamp + ".jpg";
+        String imageFileName = "PictureParrot-source.jpg";
+        //File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File storageDir = Environment.getExternalStorageDirectory();
+        //pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+        pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+        File file = new File(pictureImagePath);
+        Uri outputFileUri = Uri.fromFile(file);
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        startActivityForResult(cameraIntent, REQUEST_CAMERA);
+
+        //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //startActivityForResult(intent, REQUEST_CAMERA);
     }
 
 
@@ -147,13 +170,40 @@ PictureLocation extends Activity {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
+            else if (requestCode == REQUEST_CAMERA) {
+                File imgFile = new  File(pictureImagePath);
+                if(imgFile.exists()){
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    Bitmap bm = Bitmap.createScaledBitmap(myBitmap, 539, 720, true);
+                    bm.compress(Bitmap.CompressFormat.PNG, 80, bytes);
+                    File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot-source.jpg");
+
+                    FileOutputStream fo;
+                    try {
+                        destination.createNewFile();
+                        fo = new FileOutputStream(destination);
+                        fo.write(bytes.toByteArray());
+                        fo.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(this, ImageModification.class);
+                    startActivity(intent);
+                }
+
+
+            }
+
         }
     }
 
-    // THIS IS WHERE THE BITMAP FILE IS GENERATED WHEN TAKING A PHOTO
+    /*// THIS IS WHERE THE BITMAP FILE IS GENERATED WHEN TAKING A PHOTO
     private void onCaptureImageResult(Intent data) {
+        //BitmapFactory.Options options = new BitmapFactory.Options();
+           // options.inScaled = false;
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.PNG, 100, bytes);
@@ -176,7 +226,7 @@ PictureLocation extends Activity {
         }
         Intent intent = new Intent(this, ImageModification.class);
         startActivity(intent);
-    }
+    } */
 
     // THIS IS WHERE THE BITMAP FILE IS GENERATED WHEN SELECTING FROM THE GALLERY
     private void onSelectFromGalleryResult(Intent data) {
@@ -187,7 +237,19 @@ PictureLocation extends Activity {
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-                bm.compress(Bitmap.CompressFormat.PNG, 100, bytes);
+
+                int width = bm.getWidth();
+                int height = bm.getHeight();
+                if (width >= 2444 && height >= 3268) {
+                    Bitmap bm2 = Bitmap.createScaledBitmap(bm, 539, 720, true);
+                    bm2.compress(Bitmap.CompressFormat.PNG, 80, bytes);
+                } else if (width >= 600 && height >= 800) {
+                    Bitmap bm2 = Bitmap.createScaledBitmap(bm, width / 2, height / 2, true);
+                    bm2.compress(Bitmap.CompressFormat.PNG, 80, bytes);
+                } else {
+                    bm.compress(Bitmap.CompressFormat.PNG, 80, bytes);
+                }
+
                 File destination = new File(Environment.getExternalStorageDirectory(), "PictureParrot-source.jpg");
 
                 FileOutputStream fo;

@@ -25,6 +25,9 @@ public class FragmentTwo extends Fragment{
         txt.setTypeface(font);
 
         Button tapToStart = (Button) v.findViewById(R.id.tapToStart);
+        Typeface font2 = Typeface.createFromAsset(getActivity().getAssets(), "fonts/JosefinSans-Regular.ttf");
+        tapToStart.setTypeface(font2);
+
 
         tapToStart.setOnClickListener(
                 new Button.OnClickListener(){

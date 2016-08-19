@@ -14,7 +14,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
@@ -33,9 +33,9 @@
         </activity>
         <activity android:name=".PictureLocation" />
         <activity android:name=".SettingsMenu" />
-        <activity android:name=".hello" />
         <activity android:name=".ImageModification" />
-        <activity android:name=".ShareDownload"></activity>
+        <activity android:name=".ShareDownload" />
+        <activity android:name=".About"></activity>
     </application>
 
 </manifest>

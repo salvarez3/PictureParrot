@@ -16,16 +16,7 @@
         android:layout_height="70dp"
         android:background="@drawable/share_button"
         android:layout_marginTop="530dp"
-        android:layout_marginLeft="70dp"/>
-
-    <ImageButton
-        android:id="@+id/save"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:background="@drawable/download_button"
-        android:layout_marginTop="530dp"
-        android:layout_marginLeft="260dp"/>
-    <!--android:actionProviderClass="android.widget.ShareActionProvider"-->
+        android:layout_marginLeft="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,8 +25,17 @@
         android:text="Share"
         android:id="@+id/shareText"
         android:layout_marginTop="615dp"
-        android:layout_marginLeft="80dp"
-        android:textColor="#4dbbe8"/>
+        android:layout_marginLeft="40dp"
+        android:textColor="#4dbbe8" />
+
+    <ImageButton
+        android:id="@+id/save"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/download_button"
+        android:layout_marginTop="530dp"
+        android:layout_marginLeft="175dp"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,7 +44,26 @@
         android:text="Save"
         android:id="@+id/saveText"
         android:layout_marginTop="615dp"
-        android:layout_marginLeft="275dp"
-        android:textColor="#4dbbe8"/>
+        android:layout_marginLeft="185dp"
+        android:textColor="#4dbbe8"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/shareDownloadToPictureLocation"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:background="@drawable/start_again2"
+        android:layout_marginTop="530dp"
+        android:layout_marginLeft="300dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="New Image"
+        android:id="@+id/shareDownloadToPictureLocationText"
+        android:layout_marginTop="615dp"
+        android:layout_marginLeft="290dp"
+        android:textColor="#4dbbe8" />
 
 </RelativeLayout>

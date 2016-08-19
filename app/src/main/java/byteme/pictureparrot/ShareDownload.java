@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -24,6 +25,7 @@ public class ShareDownload extends AppCompatActivity {
 
     private ImageView modifiedImage;
     private ImageButton saveButton;
+    private ImageButton shareDownloadToPictureLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +35,17 @@ public class ShareDownload extends AppCompatActivity {
         // Change font of Share and Save TextViews
         TextView tx1 = (TextView)findViewById(R.id.shareText);
         TextView tx2 = (TextView)findViewById(R.id.saveText);
+        TextView tx3 = (TextView)findViewById(R.id.shareDownloadToPictureLocationText);
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
         tx1.setTypeface(custom_font);
         tx2.setTypeface(custom_font);
+        tx3.setTypeface(custom_font);
 
         modifiedImage = (ImageView) findViewById(R.id.modifiedImage);
         final Context context = this;
         saveButton = (ImageButton) findViewById(R.id.save);
+        shareDownloadToPictureLocation = (ImageButton) findViewById(R.id.shareDownloadToPictureLocation);
+
 
         // GETTING THE MODIFIED IMAGE FROM INTERNAL STORAGE AND DISPLAYING IT IN THE IMAGEVIEW
         File file = new File(Environment.getExternalStorageDirectory(), "PictureParrot-modified.jpg");
@@ -80,6 +86,16 @@ public class ShareDownload extends AppCompatActivity {
                     }
                 }
         );
+
+        shareDownloadToPictureLocation.setOnClickListener(
+                new ImageButton.OnClickListener(){
+                    public void onClick(View v){
+                        startActivity(new Intent(ShareDownload.this, PictureLocation.class));
+                    }
+                }
+        );
+
+
 
         /*// CODE FOR SHARING A STRING TO THIRD PARTY APPS
         ImageButton menu_item_share = (ImageButton)findViewById(R.id.menu_item_share);

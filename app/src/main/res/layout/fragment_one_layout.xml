@@ -11,10 +11,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/appLogo"
         android:src="@drawable/parrot_logo2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="190dp"
         />
 
     <TextView
@@ -25,7 +24,7 @@
         android:id="@+id/appTitle"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="122dp"
+        android:layout_marginBottom="100dp"
         android:textSize="45dp"
         android:textColor="#4dbbe8" />
 
