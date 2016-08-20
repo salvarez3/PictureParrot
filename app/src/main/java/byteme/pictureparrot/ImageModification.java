@@ -98,6 +98,12 @@ public class ImageModification extends AppCompatActivity {
                                         quote.setText(userInput.getText().toString());
                                     }
                                 })
+                        .setNeutralButton("ADD QUOTATION MARKS",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        quote.setText("\"" + userInput.getText().toString()+ "\".");
+                                    }
+                                })
                         .setNegativeButton("Cancel",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {

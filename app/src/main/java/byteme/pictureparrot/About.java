@@ -33,7 +33,7 @@ public class About extends AppCompatActivity {
                 "get quotes from the following categories: Random, Inspirational, Sports, Life, " +
                 "Funny, Love, Management and also the Quote of the Day which can be from any category. " +
                 "The user is also able to enter their own text or quote if they wish. Once a quote " +
-                "has been chosen by the user it will be overlaid onto their selected image. " +
+                "has been chosen by the user, it will be overlaid onto their selected image. " +
                 "The quote can be moved around the screen by pressing, holding and dragging the quote. " +
                 "To allow further customisation of the quote, Picture Parrot features change font, " +
                 "change text size and change text colour functionality. Once the user is happy with their " +

@@ -18,7 +18,7 @@ public class SettingsMenu extends AppCompatActivity {
 
         // Changes the font of the "Settings" Text View
         TextView tx1 = (TextView)findViewById(R.id.settingsTitle);
-        Typeface custom_font1 = Typeface.createFromAsset(getAssets(),  "fonts/Cabin-Regular.ttf");
+        Typeface custom_font1 = Typeface.createFromAsset(getAssets(),  "fonts/Chewy.ttf");
         tx1.setTypeface(custom_font1);
 
         // CODE TO GO TO THE ABOUT SCREEN

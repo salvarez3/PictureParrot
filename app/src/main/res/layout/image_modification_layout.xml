@@ -14,7 +14,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:id="@+id/sourceImage" />
+            android:background="#ffffff"
+            android:id="@+id/sourceImage"
+            android:backgroundTint="#ffffff" />
 
         <byteme.pictureparrot.DraggableQuote
             android:layout_width="360dp"

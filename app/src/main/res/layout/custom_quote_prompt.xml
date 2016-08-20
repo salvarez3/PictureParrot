@@ -7,9 +7,9 @@
         android:id="@+id/customQuoteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter your custom quote below:"
+        android:text="Enter your quote or text below:"
         android:textColor="#4cb7e4"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="30dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -17,7 +17,7 @@
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_marginTop="70dp"
-        android:layout_marginLeft="-275dp">
+        android:layout_marginLeft="-280dp">
 
         <requestFocus />
     </EditText>
